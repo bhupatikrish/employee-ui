@@ -57,9 +57,9 @@ export class EmployeeService {
     return this.http.get(this.employeesUrl + '/' + id);
   }
 
-  public findEmployee(search: string): Observable<any> {
+  public searchEmployees(search: string): Observable<any> {
     const httpParams = new HttpParams().set('q', search);
-    return this.http.get(this.employeesUrl, { params: httpParams });
+    return this.http.get(this.employeesUrl + '/search', { params: httpParams });
   }
 
   public addEmployee(employee: Employee): Observable<any> {

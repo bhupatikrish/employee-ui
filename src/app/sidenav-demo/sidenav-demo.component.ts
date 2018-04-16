@@ -18,6 +18,7 @@ export class SidenavDemoComponent implements OnInit, OnDestroy {
   public employees: Array<Employee>;
   public selectedEmployee = new Employee();
   mode = Mode.START;
+  search: string;
 
   searchFormControl = new FormControl('', [
     Validators.required
@@ -72,6 +73,18 @@ export class SidenavDemoComponent implements OnInit, OnDestroy {
   employeeDetails(id: number) {
     this.mode = Mode.VIEW;
     this.employeeService.employeeDetails(id);
+  }
+
+  searchEmployees() {
+    if (this.search) {
+      this.employeeService.searchEmployees(this.search).subscribe((data) => {
+        this.employees = data;
+        this.mode = Mode.START;
+      });
+    } else {
+      this.getAllEmployees();
+    }
+
   }
 
   ngOnDestroy() {

@@ -17,7 +17,7 @@ export class GridDemoComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public employees: Array<Employee>;
   public selectedEmployee = new Employee();
-  mode = Mode.VIEW;
+  mode = Mode.START;
 
   displayedColumns = ['id', 'firstName', 'lastName', 'salary'];
   dataSource: MatTableDataSource<Employee>;
@@ -34,15 +34,22 @@ export class GridDemoComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.deleteSubscription = employeeService.employeeDeleted$.subscribe((id) => {
       this.getAllEmployees();
+      this.mode = Mode.START;
     });
 
     this.viewSubscription = employeeService.employeeView$.subscribe((id) => {
-      this.getAllEmployees();
-      this.mode = Mode.VIEW;
+      if (id) {
+        this.getAllEmployees();
+        this.employeeDetails(id);
+      } else {
+        this.mode = Mode.START;
+      }
     });
 
     this.editSubscription = employeeService.employeeEdit$.subscribe((id) => {
-      this.mode = Mode.EDIT;
+      if (id) {
+        this.mode = Mode.EDIT;
+      }
     });
   }
 
