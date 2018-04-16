@@ -5,4 +5,5 @@ export class Employee {
     public zipcode: number;
     public salary: string;
     public title: string;
+    public avatar: string;
 }

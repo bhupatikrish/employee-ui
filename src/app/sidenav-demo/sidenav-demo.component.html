@@ -1,0 +1,63 @@
+<div fxLayout="column" fxFlex style="min-height: 700px">
+
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Employees demo</span>
+
+      <!-- Filler that pushes the menu button to the end of the toolbar -->
+      <span fxFlex></span>
+
+      <button mat-icon-button [matMenuTriggerFor]="themeMenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-sidenav-container fxFlex>
+    <mat-sidenav mode="side" opened>
+
+      <mat-tab-group>
+        <mat-tab label="Users">
+          <mat-nav-list>
+
+            <mat-list-item>
+                <form class="example-form">
+                    <mat-form-field class="example-full-width">
+                      <input matInput type="search" placeholder="Search" [formControl]="searchFormControl" [errorStateMatcher]="matcher">
+                      <mat-error *ngIf="!searchFormControl.hasError('required')">
+                        Please enter a valid search
+                      </mat-error>
+                      <mat-error *ngIf="searchFormControl.hasError('required')">
+                        Search is <strong>required</strong>
+                      </mat-error>
+                    </mat-form-field>
+                  </form>
+            </mat-list-item>
+
+            <mat-list-item *ngFor="let employee of employees" (click)="employeeDetails(employee.id)">
+              <mat-icon matListAvatar svgIcon="avatars:svg-11" class="avatar"></mat-icon>
+              <span>{{employee.firstName + ' ' + employee.lastName}}</span>
+            </mat-list-item>
+          </mat-nav-list>
+        </mat-tab>
+      </mat-tab-group>
+
+    </mat-sidenav>
+    <div class="content" fxLayout="row" fxLayout.sm="column" fxLayoutGap="16px" >
+      <app-employee-start *ngIf="mode=='start'"></app-employee-start>
+      <app-employee-detail *ngIf="mode=='view'"></app-employee-detail>
+      <app-employee-edit *ngIf="mode=='edit' || mode=='add'"></app-employee-edit>
+
+      <button mat-fab>
+          <mat-icon (click)="addEmployee()">add</mat-icon>
+        </button>
+    </div>
+  </mat-sidenav-container>
+
+  <mat-menu #themeMenu x-position="before">
+    <button mat-menu-item (click)="isDarkTheme = !isDarkTheme">Toggle Theme</button>
+  </mat-menu>
+
+
+
+</div>
