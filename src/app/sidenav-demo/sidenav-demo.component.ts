@@ -10,8 +10,7 @@ import { Mode } from '../employee/model/mode.enum';
 @Component({
   selector: 'app-sidenav-demo',
   templateUrl: './sidenav-demo.component.html',
-  styleUrls: ['./sidenav-demo.component.css'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./sidenav-demo.component.css']
 })
 export class SidenavDemoComponent implements OnInit, OnDestroy {
 

@@ -6,12 +6,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
 import { EmployeeDetailComponent } from './employee/employee-detail/employee-detail.component';
 import { EmployeeService } from './services/employee.service';
-import { EmployeePageComponent } from './employee/employee-page/employee-page.component';
 import { MaterialUiModule } from './materialui.module';
-import { EmployeeGridComponent } from './employee/employee-grid/employee-grid.component';
 import { SidenavDemoComponent } from './sidenav-demo/sidenav-demo.component';
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material';
 import { EmployeeEditComponent } from './employee/employee-edit/employee-edit.component';
@@ -23,10 +20,7 @@ import { EmployeeStartComponent } from './employee/employee-start/employee-start
 @NgModule({
   declarations: [
     AppComponent,
-    EmployeeListComponent,
     EmployeeDetailComponent,
-    EmployeePageComponent,
-    EmployeeGridComponent,
     SidenavDemoComponent,
     EmployeeEditComponent,
     DeleteDialogComponent,

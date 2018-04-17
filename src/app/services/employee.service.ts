@@ -5,11 +5,12 @@ import { Employee } from '../employee/model/employee.model';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class EmployeeService {
 
-  private baseUrl = 'http://localhost:8080';
+  private baseUrl = environment.serviceUrl;
   // private baseUrl = 'http://employee-service.us-east-1.elasticbeanstalk.com';
   private employeesUrl = this.baseUrl + '/api/employees';
   private employeeDetailsSource = new BehaviorSubject<number>(null);

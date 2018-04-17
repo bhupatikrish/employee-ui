@@ -12,3 +12,20 @@
   .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
   
   .lh-condensed { line-height: 1.25; }
+
+  .content {
+    padding: 12px;
+  }
+
+  .emp-info {
+    padding: 12px;
+    width: 60%;
+  }
+
+  .emp-image {
+    padding: 12px;
+    width: 35%;
+  }
+  .emp-field {
+    font-size: x-large;
+  }

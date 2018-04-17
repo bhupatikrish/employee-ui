@@ -1,17 +1,50 @@
 <mat-card fxFlex="95">
     <mat-card-title-group>
-        <mat-icon matListAvatar svgIcon="avatars:svg-11" class="avatar"></mat-icon>
+            <img mat-card-sm-image [src]="employee.avatar">
+
         <mat-card-title>{{ employee.firstName + ' ' + employee.lastName}}</mat-card-title>
         <mat-card-subtitle>{{ employee.title }}</mat-card-subtitle>
     </mat-card-title-group>
     <mat-divider [inset]="true"></mat-divider>
 
-    <mat-card-content>
+    <mat-card-content class="content" fxLayout="row" fxLayoutAlign="center center">
+        <section class="emp-info" align="left">
+                <div class="emp-field">
+                        <label>Employee Id: </label>
+                        <span>{{ employee.id }}</span>
+                    </div>
+                    <div class="emp-field">
+                            <label>First Name: </label>
+                            <span>{{ employee.firstName }}</span>
+                    </div>   
+                    <div class="emp-field">
+                            <label>Last Name: </label>
+                            <span>{{ employee.lastName }}</span>
+                    </div>    
+                    <div class="emp-field">
+                            <label>Address: </label>
+                            <span>{{ employee.address1 }}</span>
+                            <span>{{ employee.city }}</span>
+                            <span>{{ employee.state }} {{ employee.zipcode }}</span>
+                    </div>  
+                    <div class="emp-field">
+                            <label>Salary: </label>
+                            <span>$ {{ employee.salary }}</span>
+                    </div>  
+                    <div class="emp-field">
+                            <label>Title: </label>
+                            <span>{{ employee.title }}</span>
+                    </div>
+        </section>
+        <section class="emp-image">
+            <img [src]="employee.image" height="300" width="220">
+        </section>
+
     </mat-card-content>
     <mat-icon class="avatar"></mat-icon>
 
     <mat-card-actions align="end">
-        <button mat-button (click)="editEmployee()">Edit</button>
-        <button mat-button (click)="openDialog()">Delete</button>
+        <button mat-raised-button color="primary" (click)="editEmployee()">Edit</button>
+        <button mat-raised-button  color="warn" (click)="openDialog()">Delete</button>
       </mat-card-actions>
 </mat-card>
