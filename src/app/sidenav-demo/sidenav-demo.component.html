@@ -1,0 +1,51 @@
+<div fxLayout="column" fxFlex style="min-height: 700px">
+
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Employees</span>
+
+      <!-- Filler that pushes the menu button to the end of the toolbar -->
+      <span fxFlex></span>
+      <button mat-fab>
+          <mat-icon (click)="addEmployee()">add</mat-icon>
+        </button>
+      <button mat-icon-button [matMenuTriggerFor]="themeMenu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-sidenav-container fxFlex>
+    <mat-sidenav mode="side" opened>
+
+        <mat-nav-list>
+
+            <mat-list-item>
+                <form class="example-form" (ngSubmit)="searchEmployees()">
+                    <mat-form-field class="example-full-width">
+                      <input matInput type="search" name="search" placeholder="Search" [(ngModel)]="search">
+                    </mat-form-field>
+                  </form>
+            </mat-list-item>
+
+            <mat-list-item *ngFor="let employee of employees" (click)="employeeDetails(employee.id)">
+              <mat-icon matListAvatar svgIcon="avatars:svg-11" class="avatar"></mat-icon>
+              <span>{{employee.firstName + ' ' + employee.lastName}}</span>
+            </mat-list-item>
+          </mat-nav-list>
+
+    </mat-sidenav>
+    <div class="content" fxLayout="row" fxLayout.sm="column" fxLayoutGap="16px" >
+      <app-employee-start *ngIf="mode=='start'"></app-employee-start>
+      <app-employee-detail *ngIf="mode=='view'"></app-employee-detail>
+      <app-employee-edit *ngIf="mode=='edit' || mode=='add'"></app-employee-edit>
+    </div>
+  </mat-sidenav-container>
+
+  <mat-menu #themeMenu x-position="before">
+    <button mat-menu-item routerLink="/grid">Grid demo</button>
+  </mat-menu>
+
+
+
+</div>

@@ -1,0 +1,55 @@
+<mat-card fxFlex="95">
+    <mat-card-title-group>
+        <mat-icon matListAvatar svgIcon="avatars:svg-11" class="avatar"></mat-icon>
+        <mat-card-title *ngIf="mode==='edit'">Edit employee</mat-card-title>
+        <mat-card-title *ngIf="mode==='add'">Add employee</mat-card-title>
+        <mat-card-subtitle>Please update the fields below and click Save </mat-card-subtitle>
+    </mat-card-title-group>
+
+    <mat-card-content>
+
+        <div>
+            <mat-form-field>
+              <input matInput placeholder="First Name" [(ngModel)]="employee.firstName" required #firstName="ngModel">
+              <mat-error *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">Please enter first name</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field>
+              <input matInput placeholder="Last Name" [(ngModel)]="employee.lastName" required #lastName="ngModel">
+              <mat-error *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">Please enter last name</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field>
+              <input matInput placeholder="Title" [(ngModel)]="employee.title" required #title="ngModel">
+              <mat-error *ngIf="title.invalid && (title.dirty || title.touched)">Please enter title</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field>
+                <input matInput placeholder="Salary" type="number" [(ngModel)]="employee.salary" required #salary="ngModel">
+                <span matPrefix>$&nbsp;</span>
+                <span matSuffix>.00</span>
+                <mat-error *ngIf="salary.invalid && (salary.dirty || salary.touched)">Please enter salary</mat-error>
+              </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field>
+              <input matInput placeholder="Zipcode" [(ngModel)]="employee.zipcode" required #zipcode="ngModel">
+              <mat-error *ngIf="zipcode.invalid && (zipcode.dirty || zipcode.touched)">Please enter zipcode</mat-error>
+            </mat-form-field>
+        </div>
+
+        </mat-card-content>
+    <mat-icon class="avatar"></mat-icon>
+
+    <mat-card-actions align="end">
+        <button mat-raised-button color="basic"  (click)="cancel()">Cancel</button>
+        <button mat-raised-button color="primary"  (click)="submit()">Save</button>
+      </mat-card-actions>
+</mat-card>

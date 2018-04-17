@@ -1,6 +1,6 @@
 :host {
-  width: 95%;
-}
+    width: 95%;
+  }
 .container {
     max-width: 960px;
   }
@@ -13,19 +13,4 @@
   
   .lh-condensed { line-height: 1.25; }
 
-  .content {
-    padding: 12px;
-  }
 
-  .emp-info {
-    padding: 12px;
-    width: 60%;
-  }
-
-  .emp-image {
-    padding: 12px;
-    width: 35%;
-  }
-  .emp-field {
-    font-size: x-large;
-  }
