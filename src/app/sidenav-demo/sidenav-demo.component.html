@@ -29,7 +29,8 @@
             </mat-list-item>
 
             <mat-list-item *ngFor="let employee of employees" (click)="employeeDetails(employee.id)">
-              <mat-icon matListAvatar svgIcon="avatars:svg-11" class="avatar"></mat-icon>
+              <!--<mat-icon matListAvatar svgIcon="avatars:svg-11" class="avatar"></mat-icon>-->
+              <img mat-card-sm-image class="avatar" [src]="employee.avatar ? employee.avatar : defaultIcon">
               <span>{{employee.firstName + ' ' + employee.lastName}}</span>
             </mat-list-item>
           </mat-nav-list>

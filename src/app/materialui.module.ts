@@ -1,6 +1,6 @@
 import { MatToolbarModule, MatTableModule, MatFormFieldModule, MatPaginatorModule, MatInputModule,
     MatButtonModule, MatCardModule, MatCheckboxModule, MatDialogModule, MatIconModule,
-    MatListModule, MatMenuModule, MatSelectModule, MatSidenavModule, MatSlideToggleModule, MatTabsModule, MatRadioModule
+    MatListModule, MatMenuModule, MatSelectModule, MatSidenavModule, MatSlideToggleModule, MatTabsModule, MatRadioModule, MatSnackBarModule
     } from '@angular/material';
 import { NgModule } from '@angular/core';
 
@@ -21,6 +21,7 @@ const uiComponents = [
     MatSidenavModule,
     MatSlideToggleModule,
     MatTabsModule,
+    MatSnackBarModule,
     MatToolbarModule];
 
 @NgModule({

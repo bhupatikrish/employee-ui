@@ -1,6 +1,6 @@
 <mat-card fxFlex="95">
     <mat-card-title-group>
-            <img mat-card-sm-image [src]="employee.avatar">
+            <img mat-card-sm-image class="avatar" [src]="employee.avatar ? employee.avatar : defaultIcon">
 
         <mat-card-title>{{ employee.firstName + ' ' + employee.lastName}}</mat-card-title>
         <mat-card-subtitle>{{ employee.title }}</mat-card-subtitle>
@@ -37,7 +37,7 @@
                     </div>
         </section>
         <section class="emp-image">
-            <img [src]="employee.image" height="300" width="220">
+            <img [src]="employee.image ? employee.image : defaultImage" height="300" width="220">
         </section>
 
     </mat-card-content>

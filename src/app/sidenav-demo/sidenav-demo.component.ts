@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
-import { ErrorStateMatcher, MatIconRegistry } from '@angular/material';
+import { ErrorStateMatcher, MatIconRegistry, MatSnackBar } from '@angular/material';
 import { EmployeeService } from '../services/employee.service';
 import { Employee } from '../employee/model/employee.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs/Subscription';
 import { Mode } from '../employee/model/mode.enum';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-sidenav-demo',
@@ -18,6 +19,7 @@ export class SidenavDemoComponent implements OnInit, OnDestroy {
   public selectedEmployee = new Employee();
   mode = Mode.START;
   search: string;
+  defaultIcon = 'https://cdn4.iconfinder.com/data/icons/standard-free-icons/139/Profile01-256.png';
 
   searchFormControl = new FormControl('', [
     Validators.required
@@ -30,7 +32,9 @@ export class SidenavDemoComponent implements OnInit, OnDestroy {
   viewSubscription: Subscription;
   editSubscription: Subscription;
 
-  constructor(private employeeService: EmployeeService, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
+  constructor(private employeeService: EmployeeService, iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer, public snackBar: MatSnackBar) {
+
     iconRegistry.addSvgIconSetInNamespace('avatars', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/avatars.svg'));
 
     this.deleteSubscription = employeeService.employeeDeleted$.subscribe((id) => {
@@ -60,7 +64,9 @@ export class SidenavDemoComponent implements OnInit, OnDestroy {
 
   getAllEmployees() {
     this.employeeService.getEmployeeList().subscribe((data) => {
-      this.employees = data;
+      this.employees = data.responseData;
+    }, (error) => {
+      this.snackBar.open(error.error.metadata.message, 'Undo', { duration: 1000 });
     });
   }
 
@@ -77,8 +83,10 @@ export class SidenavDemoComponent implements OnInit, OnDestroy {
   searchEmployees() {
     if (this.search) {
       this.employeeService.searchEmployees(this.search).subscribe((data) => {
-        this.employees = data;
+        this.employees = data.responseData;
         this.mode = Mode.START;
+      }, (error) => {
+        this.snackBar.open(error.error.metadata.message, 'Undo', { duration: 1000 });
       });
     } else {
       this.getAllEmployees();
