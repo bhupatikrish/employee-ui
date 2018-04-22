@@ -6,6 +6,8 @@ import { isNumeric } from 'rxjs/util/isNumeric';
 import { Subscription } from 'rxjs/Subscription';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Mode } from '../model/mode.enum';
+import { MatSnackBar } from '@angular/material';
+import { states } from '../model/states.model';
 
 @Component({
   selector: 'app-employee-edit',
@@ -21,8 +23,9 @@ export class EmployeeEditComponent implements OnDestroy {
 
   email = new FormControl('', [Validators.required, Validators.email]);
 
+  states = states;
 
-  constructor(private employeeService: EmployeeService, fb: FormBuilder) {
+  constructor(private employeeService: EmployeeService, fb: FormBuilder, public snackBar: MatSnackBar) {
     this.editSubscription = this.employeeService.employeeEdit$.subscribe((id) => {
       if (id) {
         this.mode = Mode.EDIT;
@@ -41,8 +44,10 @@ export class EmployeeEditComponent implements OnDestroy {
 
   getEmployeeDetails(id) {
     if (id) {
-      this.employeeService.getEmployee(id).subscribe((employee) => {
-        this.employee = employee;
+      this.employeeService.getEmployee(id).subscribe((data) => {
+        this.employee = data.responseData;
+      }, (error) => {
+        this.snackBar.open(error.error.metadata.message, 'Undo', { duration: 1000 });
       });
     }
   }
@@ -66,11 +71,15 @@ export class EmployeeEditComponent implements OnDestroy {
       this.employeeService.updateEmployee(this.employee.id, this.employee).subscribe((data) => {
         this.employeeService.employeeView(this.employee.id);
         // this.mode = Mode.ADD;
+      }, (error) => {
+        this.snackBar.open(error.error.metadata.message, 'Undo', { duration: 1000 });
       });
     } else {
       this.employeeService.addEmployee(this.employee).subscribe((data) => {
-        this.employeeService.employeeView(data.id);
+        this.employeeService.employeeView(data.responseData.id);
         // this.mode = Mode.ADD;
+      }, (error) => {
+        this.snackBar.open(error.error.metadata.message, 'Undo', { duration: 1000 });
       });
     }
   }

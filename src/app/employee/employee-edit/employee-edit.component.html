@@ -5,51 +5,81 @@
         <mat-card-title *ngIf="mode==='add'">Add employee</mat-card-title>
         <mat-card-subtitle>Please update the fields below and click Save </mat-card-subtitle>
     </mat-card-title-group>
-
-    <mat-card-content>
-
-        <div>
-            <mat-form-field>
-              <input matInput placeholder="First Name" [(ngModel)]="employee.firstName" required #firstName="ngModel">
-              <mat-error *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">Please enter first name</mat-error>
-            </mat-form-field>
-        </div>
-
-        <div>
-            <mat-form-field>
-              <input matInput placeholder="Last Name" [(ngModel)]="employee.lastName" required #lastName="ngModel">
-              <mat-error *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">Please enter last name</mat-error>
-            </mat-form-field>
-        </div>
-
-        <div>
-            <mat-form-field>
-              <input matInput placeholder="Title" [(ngModel)]="employee.title" required #title="ngModel">
-              <mat-error *ngIf="title.invalid && (title.dirty || title.touched)">Please enter title</mat-error>
-            </mat-form-field>
-        </div>
-
-        <div>
-            <mat-form-field>
-                <input matInput placeholder="Salary" type="number" [(ngModel)]="employee.salary" required #salary="ngModel">
-                <span matPrefix>$&nbsp;</span>
-                <span matSuffix>.00</span>
-                <mat-error *ngIf="salary.invalid && (salary.dirty || salary.touched)">Please enter salary</mat-error>
-              </mat-form-field>
-        </div>
-
-        <div>
-            <mat-form-field>
-              <input matInput placeholder="Zipcode" [(ngModel)]="employee.zipcode" required #zipcode="ngModel">
-              <mat-error *ngIf="zipcode.invalid && (zipcode.dirty || zipcode.touched)">Please enter zipcode</mat-error>
-            </mat-form-field>
-        </div>
-
+    <form (ngSubmit)="employeeForm.form.valid ? submit(): false;" #employeeForm="ngForm">
+        <mat-card-content>
+            <div>
+                <mat-form-field>
+                    <input matInput placeholder="First Name" name="firstName" [(ngModel)]="employee.firstName" required #firstName="ngModel">
+                    <mat-error *ngIf="firstName.invalid">Please enter first name</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <input matInput placeholder="Last Name" [(ngModel)]="employee.lastName" name="lastName" required #lastName="ngModel">
+                    <mat-error *ngIf="lastName.invalid">Please enter last name</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <input matInput placeholder="Address" [(ngModel)]="employee.address1" name="address1" required #address1="ngModel">
+                    <mat-error *ngIf="address1.invalid">Please enter the address</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <input matInput placeholder="Address 2" [(ngModel)]="employee.address2" name="address2" #address2="ngModel">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <input matInput placeholder="City" [(ngModel)]="employee.city" name="city" required #city="ngModel">
+                    <mat-error *ngIf="city.invalid">Please enter city</mat-error>
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <mat-select placeholder="State" [(ngModel)]="employee.state" name="state" required #state="ngModel">
+                            <mat-option>--</mat-option>
+                            <mat-option *ngFor="let stateVar of states" [value]="stateVar.value">
+                                {{stateVar.text}}
+                            </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="state.hasError('required')">Please choose a state</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                        <input matInput placeholder="Zipcode" [(ngModel)]="employee.zipcode" name="zipcode" type="number" size=5 pattern=".{5,}" #zipcode="ngModel">
+                        <mat-error *ngIf="zipcode.invalid">Please enter zipcode</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <input matInput placeholder="Title" [(ngModel)]="employee.title" name="title" required #title="ngModel">
+                    <mat-error *ngIf="title.invalid">Please enter title</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <input matInput placeholder="Salary" type="number" [(ngModel)]="employee.salary" name="salary" required #salary="ngModel">
+                    <span matPrefix>$&nbsp;</span>
+                    <span matSuffix>.00</span>
+                    <mat-error *ngIf="salary.invalid">Please enter salary</mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <input matInput placeholder="Avatar" [(ngModel)]="employee.avatar" name="avatar" #avatar="ngModel">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <input matInput placeholder="Image" [(ngModel)]="employee.image" name="image" #image="ngModel">
+                </mat-form-field>
+            </div>
         </mat-card-content>
-    <mat-icon class="avatar"></mat-icon>
+        <mat-icon class="avatar"></mat-icon>
 
-    <mat-card-actions align="end">
-        <button mat-raised-button color="basic"  (click)="cancel()">Cancel</button>
-        <button mat-raised-button color="primary"  (click)="submit()">Save</button>
-      </mat-card-actions>
+        <mat-card-actions align="end">
+            <button mat-raised-button color="basic" (click)="cancel()">Cancel</button>
+            <button mat-raised-button color="primary" type="submit">Save</button>
+        </mat-card-actions>
+    </form>
 </mat-card>

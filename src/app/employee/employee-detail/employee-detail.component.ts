@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Employee } from '../model/employee.model';
 import { isNumeric } from 'rxjs/util/isNumeric';
 import { Subscription } from 'rxjs/Subscription';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 
 @Component({
@@ -16,8 +16,11 @@ export class EmployeeDetailComponent implements OnDestroy {
 
   public employee = new Employee();
   subscription: Subscription;
+  // tslint:disable-next-line:max-line-length
+  defaultImage = 'https://cdn4.iconfinder.com/data/icons/standard-free-icons/139/Profile01-512.png';
+  defaultIcon = 'https://cdn4.iconfinder.com/data/icons/standard-free-icons/139/Profile01-256.png';
 
-  constructor(private employeeService: EmployeeService, public dialog: MatDialog) {
+  constructor(private employeeService: EmployeeService, public dialog: MatDialog, public snackBar: MatSnackBar) {
     this.subscription = employeeService.employeeDetails$.subscribe((id) => {
         this.getEmployeeDetails(id);
       });
@@ -25,8 +28,10 @@ export class EmployeeDetailComponent implements OnDestroy {
 
   getEmployeeDetails(id) {
     if (id) {
-      this.employeeService.getEmployee(id).subscribe((employee) => {
-        this.employee = employee;
+      this.employeeService.getEmployee(id).subscribe((data) => {
+        this.employee = data.responseData;
+      }, (error) => {
+        this.snackBar.open(error.error.metadata.message, 'Undo', { duration: 1000 });
       });
     }
   }
@@ -48,6 +53,8 @@ export class EmployeeDetailComponent implements OnDestroy {
     this.employeeService.deleteEmployee(employeeId).subscribe(() => {
       this.employee = new Employee();
       this.employeeService.employeeDeleted();
+    }, (error) => {
+      this.snackBar.open(error.error.metadata.message, 'Undo', { duration: 1000 });
     });
   }
 

@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeeStartComponent implements OnInit {
 
+  defaultIcon = 'https://cdn4.iconfinder.com/data/icons/standard-free-icons/139/Profile01-256.png';
+
   constructor() { }
 
   ngOnInit() {

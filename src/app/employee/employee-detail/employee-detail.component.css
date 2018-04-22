@@ -1,9 +1,17 @@
-:host {
-  width: 95%;
-}
-.container {
-    max-width: 960px;
+@media screen and (min-width: 950px) {
+  :host {
+    width: 100%;
   }
+  .container {
+      max-width: 90%;
+    }
+    .emp-image img {
+      height: 400px;
+      width: 300px;
+    }
+}
+
+
   
   .border-top { border-top: 1px solid #e5e5e5; }
   .border-bottom { border-bottom: 1px solid #e5e5e5; }
@@ -29,3 +37,35 @@
   .emp-field {
     font-size: x-large;
   }
+
+  .avatar {
+    overflow: hidden;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 12px;
+  }
+
+  @media screen and (max-width: 768px) {
+    :host {
+      width: 100%;
+    }
+    .container {
+      max-width: 100%;
+    }
+    .emp-info {
+      padding: 12px;
+      width: 40%;
+    }
+    .emp-field {
+      font-size: small;
+    }
+    .emp-image {
+      padding: 12px;
+      width: 35%;
+    }
+    .emp-image img {
+      height: 100px;
+      width: 100px;
+    }
+}
