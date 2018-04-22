@@ -19,6 +19,7 @@ export class SidenavDemoComponent implements OnInit, OnDestroy {
   public selectedEmployee = new Employee();
   mode = Mode.START;
   search: string;
+  screenWidth: number;
   defaultIcon = 'https://cdn4.iconfinder.com/data/icons/standard-free-icons/139/Profile01-256.png';
 
   searchFormControl = new FormControl('', [
@@ -36,6 +37,13 @@ export class SidenavDemoComponent implements OnInit, OnDestroy {
     sanitizer: DomSanitizer, public snackBar: MatSnackBar) {
 
     iconRegistry.addSvgIconSetInNamespace('avatars', sanitizer.bypassSecurityTrustResourceUrl('assets/icons/avatars.svg'));
+
+  // set screenWidth on page load
+  this.screenWidth = window.innerWidth;
+  window.onresize = () => {
+    // set screenWidth on screen size change
+    this.screenWidth = window.innerWidth;
+  };
 
     this.deleteSubscription = employeeService.employeeDeleted$.subscribe((id) => {
       this.getAllEmployees();

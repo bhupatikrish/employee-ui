@@ -3,12 +3,6 @@
     flex: 1;
   }
   
-
-  .content {
-    padding: 12px;
-    min-width: 900px;
-  }
-  
   mat-icon.avatar {
     overflow: hidden;
     width: 64px;
@@ -24,12 +18,6 @@
   }
 
 
-  .example-container {
-    display: flex;
-    flex-direction: column;
-    min-width: 900px;
-  }
-  
   .example-header {
     min-height: 64px;
     padding: 8px 24px 0;
@@ -45,3 +33,43 @@
     max-height: 500px;
   }
   
+
+  @media screen and (min-width: 950px) {
+    .content {
+      padding: 12px;
+      min-width: 900px;
+    }
+    .example-container {
+      display: flex;
+      flex-direction: column;
+      min-width: 900px;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .container {
+      max-width: 100%;
+      min-width: 100px;
+    }
+    .example-container {
+      display: flex;
+      flex-direction: column;
+      min-width: 200px;
+    }
+
+    .emp-info {
+      padding: 12px;
+      width: 40%;
+    }
+    .emp-field {
+      font-size: small;
+    }
+    .emp-image {
+      padding: 12px;
+      width: 35%;
+    }
+    .emp-image img {
+      height: 100px;
+      width: 100px;
+    }
+}

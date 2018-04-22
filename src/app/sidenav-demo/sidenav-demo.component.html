@@ -16,7 +16,7 @@
   </mat-toolbar>
 
   <mat-sidenav-container fxFlex>
-    <mat-sidenav mode="side" opened>
+    <mat-sidenav #sidenav [opened]="screenWidth > 840" [mode]="(screenWidth > 840) ? 'side' : 'over'">
 
         <mat-nav-list>
 
@@ -36,6 +36,9 @@
           </mat-nav-list>
 
     </mat-sidenav>
+    <div [ngStyle]="{'display' : (screenWidth > 840) ? 'none' : 'block'}">
+      <button type="button" md-button (click)="sidenav.open()">>> Open</button>
+    </div>
     <div class="content" fxLayout="row" fxLayout.sm="column" fxLayoutGap="16px" >
       <app-employee-start *ngIf="mode=='start'"></app-employee-start>
       <app-employee-detail *ngIf="mode=='view'"></app-employee-detail>
