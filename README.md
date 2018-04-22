@@ -67,26 +67,18 @@ This service is developed using Spring Framework. https://projects.spring.io/spr
 
 <img src="https://s3.amazonaws.com/github-arch-img/service-sequence.jpg" height="400px" width="500px"/>
 
-## Development server
+## Local development environment
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+<ol>
+  <li>Install Nodejs server. https://nodejs.org</li>
+  <li>Install Angular CLI. https://cli.angular.io/</li>
+  <li>Install Spring tool suite or similar Java IDE. https://spring.io/tools/sts/all</li>
+  <li>Install Git. https://git-scm.com/</li>
+  <li>run "git clone https://github.com/bhupatikrish/employee-service.git"</li>
+  <li>Open Java IDE and import employee-service. Run the project as "Springboot application"</li>
+  <li>run "git clone https://github.com/bhupatikrish/employee-ui.git"</li>
+  <li>Go to employee-ui folder and run "npm install"</li>
+  <li>run "ng serve". Navigate to `http://localhost:4200/`</li>
+</ol>
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
